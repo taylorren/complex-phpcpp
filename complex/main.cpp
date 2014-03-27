@@ -93,6 +93,8 @@ extern "C" {
         // create static instance of the extension object
         static Php::Extension myExtension("complex", "1.0");
 
+        Php::Namespace myNamespace("trComplex");
+        
         // description of the class so that PHP knows which methods are accessible
         Php::Class<Complex> complex("Complex");
 
@@ -101,11 +103,14 @@ extern "C" {
         complex.method("__construct", &Complex::__construct);
         //complex.method("getReal", &Complex::getReal);
         complex.method("add", &Complex::add, {
-            Php::ByVal("op", "Complex", false, true)
+            Php::ByVal("op", "trComplex\\Complex", false, true)
         });
+        
+        myNamespace.add(std::move(complex));
 
         // add the class to the extension
-        myExtension.add(std::move(complex));
+        //myExtension.add(std::move(complex));
+        myExtension.add(std::move(myNamespace));
 
         // return the extension
         return myExtension;

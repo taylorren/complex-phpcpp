@@ -1,9 +1,9 @@
 <?php
 
-$c=new Complex(-3,-4);
+$c=new trComplex\Complex(-3,-4);
 echo $c->mod()."\n";
 
-$d=new Complex(4,3);
+$d=new trComplex\Complex(4,3);
 $e=$d->add($c)->add($c);
 
 echo ($d->mod()."\n");
